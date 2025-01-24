@@ -11,6 +11,7 @@ class TabelC1 extends Model
 
 
     protected $fillable = [
-        'visi_misi'
+        'visi_misi',
+        'prodi'
     ];
 }

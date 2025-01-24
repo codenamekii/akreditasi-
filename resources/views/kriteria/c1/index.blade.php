@@ -22,22 +22,26 @@
     <div class="">
       <h1>K1 Visi Misi</h1>
 
-      <div class="row mb-3">
-        <div class="col-8">
-          <form action="{{ route('kriteria1.store') }}" method="post" enctype="multipart/form-data">
+      @if (Auth::user()->role == 'admin prodi')
+        <div class="row mb-3">
+          <div class="col-8">
+            <form action="{{ route('kriteria1.store') }}" method="post" enctype="multipart/form-data">
 
-            @csrf
+              @csrf
+              <input type="hidden" name="prodi" value="{{ Auth::user()->prodi->nama }}">
 
-            <div class="mb-1">
-              <label for="visi_misi" class="form-label">Upload Dokumen Visi Misi</label>
-              <input class="form-control" type="file" id="visi_misi" name="visi_misi" required>
-            </div>
+              <div class="mb-1">
+                <label for="visi_misi" class="form-label">Upload Dokumen Visi Misi</label>
+                <input class="form-control" type="file" id="visi_misi" name="visi_misi" required>
+              </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
 
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
+      @endif
+
 
       @if ($table_c1)
         <div class="mt-6">

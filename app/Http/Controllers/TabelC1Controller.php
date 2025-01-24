@@ -8,28 +8,27 @@ use Illuminate\Http\Request;
 
 class TabelC1Controller extends Controller
 {
-    protected $akunController;
-
-    public function __construct()
-    {
-        $this->akunController = new AkunController();
-    }
 
     public function index()
     {
 
-        $table_c1 = TabelC1::first();
+        $user_login_prodi = auth()->user()->prodi->nama;
 
-        // dd($visi_misi);
+        $table_c1 = TabelC1::where('prodi', $user_login_prodi)->first();
+
+        // dd($table_c1);
 
         return view('kriteria.c1.index', compact('table_c1'));
     }
 
     public function store(Request $request)
     {
+
+        // dd($request->all());
         // Validasi input
         $this->validate($request, [
-            'visi_misi' => 'required' // Validasi file
+            'visi_misi' => 'required', // Validasi file
+            'prodi' => 'required|string|max:255', // Validasi prodi
         ]);
 
         // Proses upload file
@@ -41,8 +40,8 @@ class TabelC1Controller extends Controller
             // Simpan file ke direktori public/documents
             $file->move(public_path('documents'), $fileName);
 
-            // Cari data yang ada di tabel
-            $existingData = TabelC1::first();
+            // Cari data berdasarkan prodi
+            $existingData = TabelC1::where('prodi', $request->prodi)->first();
 
             if ($existingData) {
                 // Jika data sudah ada, hapus file lama
@@ -53,12 +52,14 @@ class TabelC1Controller extends Controller
 
                 // Update data di database
                 $existingData->update([
-                    'visi_misi' => $fileName
+                    'visi_misi' => $fileName,
+                    'prodi' => $request->prodi,
                 ]);
             } else {
                 // Jika data belum ada, buat data baru
                 TabelC1::create([
-                    'visi_misi' => $fileName
+                    'visi_misi' => $fileName,
+                    'prodi' => $request->prodi,
                 ]);
             }
         }
