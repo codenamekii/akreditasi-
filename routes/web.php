@@ -21,16 +21,16 @@ use App\Http\Controllers\{
     MatakuliahController,
     TendikController,
     mailController,
-
+    TabelC1Controller,
 };
 
-Route::get('/reset/password',[mailController::class, 'reset_password'])->name('email.reset_password');
+Route::get('/reset/password', [mailController::class, 'reset_password'])->name('email.reset_password');
 
 // redirect route ke route login
 Route::redirect('/', '/login');
 // lupa password
-Route::get('/forgot',[AutentikasiController::class, 'forgot_form']);
-Route::post('/forgot/reset',[AutentikasiController::class, 'sendResetPassword'])->name('password.reset');
+Route::get('/forgot', [AutentikasiController::class, 'forgot_form']);
+Route::post('/forgot/reset', [AutentikasiController::class, 'sendResetPassword'])->name('password.reset');
 
 // buatkan code route untuk login dan logout. sertakan nama route
 Route::get('/login', [AutentikasiController::class, 'index'])->name('login');
@@ -42,8 +42,8 @@ Route::get('/logout', [AutentikasiController::class, 'logout'])->name('logout')-
 // dashboard
 // ====================================
 Route::middleware('auth')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-        Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
 });
 
 // ====================================
@@ -59,30 +59,30 @@ Route::middleware('auth')->group(function () {
 });
 
 
-    // ====================================
-    // matakuliah
-    // ====================================
-    Route::middleware('auth')->group(function () {
-        Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
-        Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])->name('matakuliah.create');
-        Route::post('/matakuliah/store', [MatakuliahController::class, 'store'])->name('matakuliah.store');
-        Route::get('/matakuliah/{id}/edit', [MatakuliahController::class, 'edit'])->name('matakuliah.edit');
-        Route::put('/matakuliah/{id}/update', [MatakuliahController::class, 'update'])->name('matakuliah.update');
-        Route::delete('/matakuliah/{id}/delete', [MatakuliahController::class, 'destroy'])->name('matakuliah.delete');
-    });
+// ====================================
+// matakuliah
+// ====================================
+Route::middleware('auth')->group(function () {
+    Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
+    Route::get('/matakuliah/create', [MatakuliahController::class, 'create'])->name('matakuliah.create');
+    Route::post('/matakuliah/store', [MatakuliahController::class, 'store'])->name('matakuliah.store');
+    Route::get('/matakuliah/{id}/edit', [MatakuliahController::class, 'edit'])->name('matakuliah.edit');
+    Route::put('/matakuliah/{id}/update', [MatakuliahController::class, 'update'])->name('matakuliah.update');
+    Route::delete('/matakuliah/{id}/delete', [MatakuliahController::class, 'destroy'])->name('matakuliah.delete');
+});
 
 
-    // ====================================
-    // tendik
-    // ====================================
-    Route::middleware('auth')->group(function () {
-        Route::get('/tendik', [TendikController::class, 'index'])->name('tendik.index');
-        Route::get('/tendik/create', [TendikController::class, 'create'])->name('tendik.create');
-        Route::post('/tendik/store', [TendikController::class, 'store'])->name('tendik.store');
-        Route::get('/tendik/{id}/edit', [TendikController::class, 'edit'])->name('tendik.edit');
-        Route::put('/tendik/{id}/update', [TendikController::class, 'update'])->name('tendik.update');
-        Route::delete('/tendik/{id}/delete', [TendikController::class, 'destroy'])->name('tendik.delete');
-    });
+// ====================================
+// tendik
+// ====================================
+Route::middleware('auth')->group(function () {
+    Route::get('/tendik', [TendikController::class, 'index'])->name('tendik.index');
+    Route::get('/tendik/create', [TendikController::class, 'create'])->name('tendik.create');
+    Route::post('/tendik/store', [TendikController::class, 'store'])->name('tendik.store');
+    Route::get('/tendik/{id}/edit', [TendikController::class, 'edit'])->name('tendik.edit');
+    Route::put('/tendik/{id}/update', [TendikController::class, 'update'])->name('tendik.update');
+    Route::delete('/tendik/{id}/delete', [TendikController::class, 'destroy'])->name('tendik.delete');
+});
 
 
 // ====================================
@@ -160,8 +160,14 @@ Route::middleware('auth')->group(function () {
 // kriteria 2
 // ====================================
 Route::middleware('auth')->group(function () {
-    Route::get('/kriteria2', [TabelC2Controller::class, 'index']);
 
+    // kriteria 1 > visi misi
+
+    Route::get('/kriteria1', [TabelC1Controller::class, 'index'])->name('kriteria1.index');
+    Route::post('/kriteria1', [TabelC1Controller::class, 'store'])->name('kriteria1.store');
+
+
+    Route::get('/kriteria2', [TabelC2Controller::class, 'index']);
     // kriteria 2 > bidang pendidikan
     Route::get('/kriteria2/bidang_pendidikan', [TabelC2Controller::class, 'bidang_pendidikan_index'])->name('bidang_pendidikan.index');
     Route::get('/kriteria2/bidang_pendidikan/create/{bidang}', [TabelC2Controller::class, 'bidang_pendidikan_create'])->name('bidang_pendidikan.create');
@@ -440,8 +446,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/kriteria6/kepuasan_mahasiswa/{id}/edit', [TabelC6Controller::class, 'kepuasan_mahasiswa_edit'])->name('kepuasan_mahasiswa.edit');
     Route::put('/kriteria6/kepuasan_mahasiswa/{id}/update', [TabelC6Controller::class, 'kepuasan_mahasiswa_update'])->name('kepuasan_mahasiswa.update');
     Route::get('/kriteria6/kepuasan_mahasiswa/{id}/delete', [TabelC6Controller::class, 'kepuasan_mahasiswa_destroy'])->name('kepuasan_mahasiswa.destroy');
-
-
 });
 // ====================================
 // kriteria 7
