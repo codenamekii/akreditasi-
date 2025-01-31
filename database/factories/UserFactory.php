@@ -69,12 +69,44 @@ class UserFactory extends Factory
 
   public function AdminProdiTeknikInformatika()
   {
-    // merupakan user default untuk admin fakutlas
+    // merupakan user default untuk admin prodi
     // admin fakultas tidak bisa di tambahkan
     return $this->state(function (array $attributes) {
       return [
         'name' => "Admin prodi Teknik Informatika",
         'email' => "informatika@admin.ac.id",
+        'email_verified_at' => now(),
+        'role' => 'admin prodi',
+        'prodi_id' => 231,
+        'password' => bcrypt("123123123"),
+        'remember_token' => Str::random(10),
+      ];
+    });
+  }
+  public function AdminProdiTeknikElektro()
+  {
+    // merupakan user default untuk admin prodi
+    // admin fakultas tidak bisa di tambahkan
+    return $this->state(function (array $attributes) {
+      return [
+        'name' => "Admin prodi Teknik Elektro",
+        'email' => "elektro@admin.ac.id",
+        'email_verified_at' => now(),
+        'role' => 'admin prodi',
+        'prodi_id' => 231,
+        'password' => bcrypt("123123123"),
+        'remember_token' => Str::random(10),
+      ];
+    });
+  }
+  public function AdminProdiTeknikSipil()
+  {
+    // merupakan user default untuk admin prodi
+    // admin fakultas tidak bisa di tambahkan
+    return $this->state(function (array $attributes) {
+      return [
+        'name' => "Admin prodi Teknik Sipil",
+        'email' => "sipil@admin.ac.id",
         'email_verified_at' => now(),
         'role' => 'admin prodi',
         'prodi_id' => 231,
@@ -99,7 +131,6 @@ class UserFactory extends Factory
                 'remember_token' => Str::random(10),
             ];
         });
-
     }
 
 

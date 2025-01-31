@@ -13,7 +13,7 @@
         </li>
         <li class="nav-item pt-3">
             <a class="nav-link d-block" href="#">
-                <h3 class="sidebar-brand-logo"><strong>SIAKSI</strong></h3>
+                <h3 class="sidebar-brand-logo"><strong class="text-center">SIAKSI</strong></h3>
                 <div class="small font-weight-light pt-1">
                   <a href="https://lamteknik.or.id/akreditasi/instrumen-akreditasi/">LAM TEKNIK</a> &
                   <a href="https://laminfokom.or.id/official/instrumen1.html">LAM INFOKOM</a>
