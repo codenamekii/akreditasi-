@@ -12,6 +12,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 10px;
+  width: 100%;
 }
 .card .icon {
   position: absolute;
@@ -31,6 +32,7 @@
   border: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  width: 100%;
 }
 .card-header {
   color: white;
@@ -55,6 +57,7 @@
 }
 .card-body {
   padding: 0;
+  width: 100%;
 }
 .chart-container {
   position: relative;
@@ -188,23 +191,24 @@
     </div>
     @enderror
     @endif
+    <div class="container-fluid">
+      <div class="col-xl-12 stretch-card grid-margin w-100">
+        <div class="card card-img">
+          <div class="card-body d-flex align-items-center">
+            <div class="text-white">
 
-    <div class="col-xl-12 stretch-card grid-margin">
-      <div class="card card-img">
-        <div class="card-body d-flex align-items-center">
-          <div class="text-white">
+              <h1 class="font-20 font-weight-semibold mb-0"> Selamat Datang di </h1>
+              <h1 class="font-20 font-weight-semibold">SIAKSI</h1>
+              <p>Sistem Informasi Akreditasi</p>
+              <p class="font-10 font-weight-semibold"> pilih program studi untuk menampilkan data kuantitatif</p>
 
-            <h1 class="font-20 font-weight-semibold mb-0"> Selamat Datang </h1>
-            <h1 class="font-20 font-weight-semibold">SIAKSI</h1>
-            <p>Sistem Informasi Akreditasi Terintegrasi</p>
-            <p class="font-10 font-weight-semibold"> pilih program studi untuk menampilkan data kuantitatif</p>
-
-            @if(Auth::user()->role == 'admin prodi')
-            <a class="btn btn-danger font-12" href="{{ route('dataprodi.index') }}">
-              <i class="fas fa-database"></i> data prodi {{ Auth::user()->prodi->nama }}
-            </a>  @endif
+              @if(Auth::user()->role == 'admin prodi')
+              <a class="btn btn-danger font-12" href="{{ route('dataprodi.index') }}">
+                <i class="fas fa-database"></i> data prodi {{ Auth::user()->prodi->nama }}
+              </a>  @endif
 
 
+            </div>
           </div>
         </div>
       </div>
@@ -326,7 +330,7 @@
         <div class="icon-container">
           <i class="fas fa-hands-helping"></i> <!-- Ikon Pengabdian -->
         </div>
-        <div>Prestrasi Mahasiswa</div>
+        <div>Prestasi Mahasiswa</div>
       </div>
       <div class="card-body">
         <div class="chart-container">
@@ -334,7 +338,7 @@
         </div>
         <div class="chart-legend mt-2 text-center">
           <div class="legend-item">
-            <span></span> Internasional<span>
+            <span></span> Internasional
             </div>
             <div class="legend-item">
               <span></span> Nasional
